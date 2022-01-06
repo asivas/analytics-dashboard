@@ -13,8 +13,14 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
     protected $title;
     protected $label;
     protected $serie;
+    protected $series;
     protected $formatter;
     protected $type;
+
+    protected $icon;
+    protected $bgcolor;
+    protected $data;
+    protected $counter;
 
     public function __construct($type,$title)
     {
@@ -116,6 +122,115 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     * @return Widget
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * @param mixed $icon
+     * @return Widget
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBgcolor()
+    {
+        return $this->bgcolor;
+    }
+
+    /**
+     * @param mixed $bgcolor
+     * @return Widget
+     */
+    public function setBgcolor($bgcolor)
+    {
+        $this->bgcolor = $bgcolor;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @param mixed $data
+     * @return Widget
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCounter()
+    {
+        return $this->counter;
+    }
+
+    /**
+     * @param mixed $counter
+     * @return Widget
+     */
+    public function setCounter($counter)
+    {
+        $this->counter = $counter;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSeries()
+    {
+        return $this->series;
+    }
+
+    /**
+     * @param mixed $series
+     * @return Widget
+     */
+    public function setSeries($series)
+    {
+        $this->series = $series;
+        return $this;
+    }
+
+
     public function toArray() :array
     {
         return [
@@ -123,13 +238,20 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
             'title'=>$this->title,
             'label'=>$this->label,
             'serie'=>$this->serie,
-            'formatter'=>$this->formatter
+            'formatter' => $this->formatter,
+            'type'=> $this->type,
+            'icon' => $this->icon,
+            'bgcolor' => $this->bgcolor,
+            'counter' => $this->counter,
+            'data' => $this->data,
+            'series' => $this->series,
         ];
     }
 
     public function offsetExists($offset)
     {
-        return isset($this->toArray()[$offset]);
+        $arr = $this->toArray();
+        return isset($arr[$offset]);
     }
 
     public function offsetGet($offset)
@@ -151,12 +273,12 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
 
     public function toJson($options = 0)
     {
-        return $this->toArray();
+        return json_encode($this->toArray());
     }
 
     public function jsonSerialize()
     {
-        return json_encode($this->toArray());
+        return $this->toArray();
     }
 
 }
