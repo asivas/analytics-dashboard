@@ -3,9 +3,6 @@
 
 namespace Asivas\Analytics\Http\Controllers\Dashboard;
 
-
-use App\Models\DoctorGroup;
-use App\Models\User;
 use Asivas\ABM\Form\FormField;
 use Asivas\Analytics\Analytics;
 use Asivas\Analytics\Http\Controllers\Dashboard\Formaters\PercentualFormatter;
