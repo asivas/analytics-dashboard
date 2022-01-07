@@ -33,7 +33,7 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getUrl()
     {

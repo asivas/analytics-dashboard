@@ -19,7 +19,7 @@ class DonutChartController extends DashboardWidgetController
     {
         $mainSerie=[];
         foreach ($data as $elem) {
-            $mainSerie[$elem[$this->dataMap['label']]] = $elem[$this->dataMap['serie']];
+            $mainSerie[$elem[$this->dataMap->getLabel()]] = $elem[$this->dataMap->getSerie()];
         }
         $formater = $this->getFormatterClass();
         return $formater::formatResponse($from, $to, [$mainSerie]);

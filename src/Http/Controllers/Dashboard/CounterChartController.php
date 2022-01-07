@@ -17,10 +17,10 @@ class CounterChartController extends DashboardWidgetController
         $mainSerie=[];
         if (count($data)>0){
             foreach ($data as $elem) {
-                $mainSerie[$elem[$this->dataMap['label']]] = $elem[$this->dataMap['serie']];
+                $mainSerie[$elem[$this->dataMap->getLabel()]] = $elem[$this->dataMap->getSerie()];
             }
         } else {
-            $mainSerie[$this->dataMap['title']] = 0;
+            $mainSerie[$this->dataMap->getTitle()] = 0;
         }
         $formater = $this->getFormatterClass();
         return $formater::formatResponse($from, $to, [$mainSerie]);

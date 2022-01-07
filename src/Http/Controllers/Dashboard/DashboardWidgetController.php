@@ -127,8 +127,10 @@ class DashboardWidgetController
             $panelAnalytics = [];
             /** @var Widget $widget */
             foreach ($widgets as $widget) {
-                $response = $this->getWidgetData(\request(),$widget->getUrl());
-                $widget->setData($response);
+                if($widget->getUrl()!=null) {
+                    $response = $this->getWidgetData(\request(),$widget->getUrl());
+                    $widget->setData($response);
+                }
                 $panelAnalytics[$widget->getUrl()] = $widget->toArray();
             }
             $analytics[$panel->getType()] = $panelAnalytics;
