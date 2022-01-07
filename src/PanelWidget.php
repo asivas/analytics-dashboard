@@ -35,11 +35,21 @@ class PanelWidget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializabl
      * @param mixed $widget
      * @return PanelWidget
      */
-    public function setWidgets($widget)
+    public function setWidgets($widgets)
     {
+        $this->widgets = $widgets;
+        return $this;
+    }
+
+    /**
+     * @param Widget $widget
+     * @return self
+     */
+    public function addWidget($widget) {
         $this->widgets[] = $widget;
         return $this;
     }
+
 
     /**
      * @return mixed
@@ -76,7 +86,6 @@ class PanelWidget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializabl
         $this->type = $type;
         return $this;
     }
-
 
 
     public function toArray() :array
