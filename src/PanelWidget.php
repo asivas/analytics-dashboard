@@ -32,7 +32,7 @@ class PanelWidget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializabl
     }
 
     /**
-     * @param mixed $widgets
+     * @param mixed $widget
      * @return PanelWidget
      */
     public function setWidgets($widget)
