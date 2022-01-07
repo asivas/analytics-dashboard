@@ -5,6 +5,7 @@ namespace Asivas\Analytics\Http\Controllers\Dashboard;
 
 use Asivas\ABM\Form\FormField;
 use Asivas\Analytics\Analytics;
+use Asivas\Analytics\AnalyticsFacade;
 use Asivas\Analytics\Http\Controllers\Dashboard\Formaters\PercentualFormatter;
 use Asivas\Analytics\Widget;
 use Illuminate\Http\Request;
@@ -53,7 +54,7 @@ class DashboardWidgetController
                 $this->dataMap = $analytic;
         }
 
-        return analytics()->$analyticsName($from, $to);
+        return AnalyticsFacade::$analyticsName($from, $to);
     }
 
     /**
