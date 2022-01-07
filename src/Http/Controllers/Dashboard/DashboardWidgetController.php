@@ -1,16 +1,12 @@
 <?php
-
-
 namespace Asivas\Analytics\Http\Controllers\Dashboard;
 
-use Asivas\ABM\Form\FormField;
-use Asivas\Analytics\Analytics;
 use Asivas\Analytics\AnalyticsFacade;
 use Asivas\Analytics\Http\Controllers\Dashboard\Formaters\PercentualFormatter;
+use Asivas\Analytics\PanelWidget;
 use Asivas\Analytics\Widget;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardWidgetController
 {
@@ -47,11 +43,16 @@ class DashboardWidgetController
 
     public function getData($analyticsName, $from, $to)
     {
-        /** @var Widget $analytic */
-        foreach ($this->getWidgets() as $analytic)
-        {
-            if($analytic->getUrl() === $analyticsName)
-                $this->dataMap = $analytic;
+        $panels = $this->getWidgetsPanels();
+        /** @var PanelWidget  $panel */
+        foreach($panels as $panel) {
+            $widgets = $panel->getWidgets();
+            /** @var Widget $analytic */
+            foreach ($widgets as $analytic)
+            {
+                if($analytic->getUrl() === $analyticsName)
+                    $this->dataMap = $analytic;
+            }
         }
 
         return AnalyticsFacade::$analyticsName($from, $to);
@@ -111,39 +112,69 @@ class DashboardWidgetController
      * This method should be overridden by the implementing/final class
      * @return array
      */
-    public function getUserWidgets() {
+    public function setupUserWidgets() {
         return [];
     }
 
     public function getAnalytics()
     {
-        $widgets = $this->getWidgets();
+        $this->setupWidgetsPanels();
+        $panels = $this->getWidgetsPanels();
         $analytics = [];
-        /** @var Widget $widget */
-        foreach ($widgets as $widget) {
-            $response = $this->getWidgetData(\request(),$widget->getUrl());
-            $widget->setData($response);
-            $analytics[$widget->getUrl()] = $widget->toArray();
+        /** @var PanelWidget $panel */
+        foreach ($panels as $panel) {
+            $widgets = $panel->getWidgets();
+            $panelAnalytics = [];
+            /** @var Widget $widget */
+            foreach ($widgets as $widget) {
+                if($widget->getUrl()!=null) {
+                    $response = $this->getWidgetData(\request(),$widget->getUrl());
+                    $widget->setData($response);
+                }
+                $panelAnalytics[$widget->getUrl()] = $widget->toArray();
+            }
+            $analytics[$panel->getType()] = $panelAnalytics;
         }
         return $analytics;
     }
 
     /**
-     * @return mixed
+     * @return PanelWidget[]
      */
-    public static function getWidgets()
+    public static function getWidgetsPanels()
     {
-        $instance = new static();
+        return self::$labelsSeriesMaps;
+    }
+
+    /**
+     * @return void
+     */
+    public function setupWidgetsPanels() {
         if(empty(self::$labelsSeriesMaps)) {
-            $userType = $instance->getUserTypeName();
-            $getWidgetsFn = 'getUserWidgets';
-            $getUserTypeWidgetsFn = "get{$userType}Widgets";
-            if (method_exists($instance, $getUserTypeWidgetsFn)) {
+            $userType = $this->getUserTypeName();
+            $getWidgetsFn = 'setupUserWidgets';
+            $getUserTypeWidgetsFn = "setup{$userType}Widgets";
+            if (method_exists($this, $getUserTypeWidgetsFn)) {
                 $getWidgetsFn = $getUserTypeWidgetsFn;
             }
-            self::$labelsSeriesMaps = $instance->$getWidgetsFn();
+            $this->$getWidgetsFn();
         }
+    }
 
-        return self::$labelsSeriesMaps;
+
+    protected static function addWidgetsPanel(PanelWidget $panel) {
+        self::$labelsSeriesMaps[$panel->getType()] = $panel;
+    }
+
+    /**
+     * @param $panelName
+     * @param $panelTitle
+     * @return PanelWidget
+     */
+    public function getWidgetsPanel($panelName,$panelTitle=null) {
+        if(!isset($panelTitle)) $panelTitle = $panelName;
+        if(!isset(self::$labelsSeriesMaps[$panelName]))
+            self::addWidgetsPanel(PanelWidget::create($panelName,$panelTitle));
+        return self::$labelsSeriesMaps[$panelName];
     }
 }

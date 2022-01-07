@@ -13,8 +13,8 @@ class TopXchartController extends DashboardWidgetController
         $serie = [];
         foreach ($data as $elem) {
             $aux = [];
-            $aux[$this->dataMap['label']] = $elem[$this->dataMap['label']];
-            $aux[$this->dataMap['serie']] = $elem[$this->dataMap['serie']];
+            $aux[$this->dataMap->getLabel()] = $elem[$this->dataMap->getLabel()];
+            $aux[$this->dataMap->getSerie()] = $elem[$this->dataMap->getSerie()];
             array_push($serie,$aux);
         }
         $formater = $this->getFormatterClass();
