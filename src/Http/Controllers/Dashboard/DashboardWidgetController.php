@@ -131,7 +131,7 @@ class DashboardWidgetController
                     $response = $this->getWidgetData(\request(),$widget->getUrl());
                     $widget->setData($response);
                 }
-                $panelAnalytics[$widget->getType()] = $widget->toArray();
+                $panelAnalytics[] = $widget->toArray();
             }
             $analytics[$panel->getType()] = $panelAnalytics;
         }
