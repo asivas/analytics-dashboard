@@ -45,8 +45,14 @@ class PanelWidget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializabl
      * @param Widget $widget
      * @return self
      */
-    public function addWidget($widget) {
-        $this->widgets[] = $widget;
+    public function addWidget($widget,$widgetName=null) {
+        if(!isset($widgetName)) {
+            if($widget->getUrl()!=null)
+                $widgetName = $widget->getUrl();
+            else
+                $widgetName = $widget->getTitle();
+        }
+        $this->widgets[$widgetName] = $widget;
         return $this;
     }
 
