@@ -21,6 +21,7 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
     protected $bgcolor;
     protected $data;
     protected $counter;
+    protected $controllerClass;
 
     public function __construct($type,$title)
     {
@@ -229,6 +230,26 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
         $this->series = $series;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getControllerClass()
+    {
+        return $this->controllerClass;
+    }
+
+    /**
+     * @param mixed $controllerClass
+     * @return Widget
+     */
+    public function setControllerClass($controllerClass)
+    {
+        $this->controllerClass = $controllerClass;
+        return $this;
+    }
+
+
 
 
     public function toArray() :array

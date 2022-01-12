@@ -67,6 +67,26 @@ class DashboardWidgetController
     }
 
     /**
+     * @param $serie
+     * @param $data
+     * @param Widget $widget
+     * @param null $dataMapSeries
+     * @return array
+     */
+    protected function getSerieData($serie, $data, Widget $widget, $dataMapSeries = null): array
+    {
+        $auxSerie['name'] = $serie;
+        $dataSerie = [];
+        foreach ($data as $elem) {
+            if (!isset($dataMapSeries) || ($serie == $elem[$dataMapSeries])) {
+                $dataSerie[$elem[$widget->getLabel()]] = $elem[$widget->getSerie()];
+            }
+        }
+        $auxSerie['data'] = $dataSerie;
+        return $auxSerie;
+    }
+
+    /**
      * @param Widget $widget
      * @param $data
      * @param $from
@@ -85,24 +105,10 @@ class DashboardWidgetController
             }
             $series = array_unique($series);
             foreach ($series as $serie) {
-                $auxSerie['name'] = $serie;
-                $dataSerie = [];
-                foreach ($data as $elem) {
-                    if (($serie == $elem[$dataMapSeries])) {
-                        $dataSerie[$elem[$widget->getLabel()]] = $elem[$widget->getSerie()];
-                    }
-                }
-                $auxSerie['data'] = $dataSerie;
-                $allSeries[] = $auxSerie;
+                $allSeries[] = $this->getSerieData($serie, $data, $widget, $dataMapSeries);
             }
         } else {
-            $uniqueDataSerie = [];
-            foreach ($data as $elem) {
-                $uniqueDataSerie[$elem[$widget->getLabel()]] = $elem[$widget->getSerie()];
-                $auxSerie['name'] = $widget->getSerie();
-                $auxSerie['data'] = $uniqueDataSerie;
-                $allSeries = [$auxSerie];
-            }
+            $allSeries[] = $this->getSerieData($widget->getSerie(), $data, $widget);             ;
         }
         $formater = $this->getFormatterClass($widget);
         return $formater::formatResponse($from, $to, $allSeries);
@@ -137,7 +143,13 @@ class DashboardWidgetController
             /** @var Widget $widget */
             foreach ($widgets as $widgetName => $widget) {
                 if($widget->getUrl()!=null) {
-                    $response = $this->getWidgetData(\request(),$widget->getUrl());
+                    $widgetController = $this;
+                    $widgetControllerClass = $widget->getControllerClass();
+                    if($widgetControllerClass!=null && class_exists($widgetControllerClass))
+                    {
+                        $widgetController= new $widgetControllerClass();
+                    }
+                    $response = $widgetController->getWidgetData(\request(),$widget->getUrl());
                     $widget->setData($response);
                 }
                 $panelAnalytics[$widgetName] = $widget->toArray();
@@ -186,5 +198,7 @@ class DashboardWidgetController
             self::addWidgetsPanel(PanelWidget::create($panelName,$panelTitle));
         return self::$labelsSeriesMaps[$panelName];
     }
+
+
 
 }

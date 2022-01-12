@@ -14,8 +14,8 @@ class CounterFormatter implements WidgetFormatter
         $mainSerie = current($series);
         return
             [
-                'title' => $mainSerie,
-                'counter' => $mainSerie[0] ?? 0,
+                'title' => key($mainSerie),
+                'counter' => current($mainSerie) ?? 0,
             ];
     }
 }
