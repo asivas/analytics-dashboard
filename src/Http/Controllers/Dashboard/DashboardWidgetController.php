@@ -41,21 +41,29 @@ class DashboardWidgetController
         return $formatterClass;
     }
 
-    public function getData($analyticsName, $from, $to)
+    /**
+     * @param $analyticsName
+     * @return Widget
+     */
+    protected function getDataMap($analyticsName)
     {
         $this->setupWidgetsPanels();
         $panels = $this->getWidgetsPanels();
-        /** @var PanelWidget  $panel */
-        foreach($panels as $panel) {
+        /** @var PanelWidget $panel */
+        foreach ($panels as $panel) {
             $widgets = $panel->getWidgets();
             /** @var Widget $analytic */
-            foreach ($widgets as $analytic)
-            {
-                if($analytic->getUrl() === $analyticsName)
-                    $this->dataMap = $analytic;
+            foreach ($widgets as $analytic) {
+                if ($analytic->getUrl() === $analyticsName)
+                    return $analytic;
             }
         }
+        return null;
+    }
 
+    public function getData($analyticsName, $from, $to)
+    {
+        $this->dataMap = $this->getDataMap($analyticsName);
         return AnalyticsFacade::$analyticsName($from, $to);
     }
 
@@ -178,4 +186,5 @@ class DashboardWidgetController
             self::addWidgetsPanel(PanelWidget::create($panelName,$panelTitle));
         return self::$labelsSeriesMaps[$panelName];
     }
+
 }
