@@ -18,14 +18,25 @@ Once you have required the package the configuration requires this 2 steps:
 
 1. Create your Analitycs Facade class in app\Facades
 
+   The Facade **must implement the getWidget** public method to be able to load the app widgets to get the widgets data
    This class should have a method for every analytics the app could graph or analyze.
    Each method will end up calling ths getData method of an Specific-Analytic class wich extends Asivas\Analytics\Analytics
    ```php
    <?php
    namespace App\Facades;
    use App\Analytics\SomeMetricsIndicator;
+   use App\Http\Controllers\Dashboard\DashboardWidgetController;
    class Analytics
    {            
+       /** 
+        ** IMPORTANT ** This method must be present, otherwise getWidgetData won't be able to build the proper response
+        */
+       public function getWidget($analyticsName):Widget {
+            $dwc = new DashboardWidgetController();
+            return $dwc->getWidget($analyticsName);
+        }
+       //** */
+
          public function someMetricsIndicator($from,$to,$params = null)
          {
            return SomeMetricsIndicator::getData($from,$to,$params);
