@@ -10,8 +10,6 @@ use Illuminate\Support\Carbon;
 
 class DashboardWidgetController
 {
-    /** @var Widget */
-    protected $dataMap;
     protected static $labelsSeriesMaps;
 
 
