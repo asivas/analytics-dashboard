@@ -4,7 +4,7 @@ namespace Asivas\Analytics\Http\Controllers\Dashboard;
 use Asivas\Analytics\AnalyticsFacade;
 use Asivas\Analytics\Http\Controllers\Dashboard\Formaters\PercentualFormatter;
 use Asivas\Analytics\PanelWidget;
-use Asivas\Analytics\Widget;
+use Asivas\Analytics\Widget\Widget;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 

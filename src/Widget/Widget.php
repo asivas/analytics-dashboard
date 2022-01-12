@@ -1,6 +1,6 @@
 <?php
 
-namespace Asivas\Analytics;
+namespace Asivas\Analytics\Widget;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
@@ -23,14 +23,15 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
     protected $counter;
     protected $controllerClass;
 
-    public function __construct($type,$title)
+    public function __construct($title, $type = 'Widget', $controllerClass=null)
     {
         $this->type = $type;
         $this->title = $title;
+        if(isset($controllerClass)) $this->setControllerClass($controllerClass);
     }
 
-    static function create($type,$title) {
-        return new static($type,$title);
+    static function create($title, $type = null) {
+        return new static($title, $type);
     }
 
     /**

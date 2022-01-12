@@ -42,7 +42,7 @@ class PanelWidget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializabl
     }
 
     /**
-     * @param Widget $widget
+     * @param \Asivas\Analytics\Widget\Widget $widget
      * @return self
      */
     public function addWidget($widget,$widgetName=null) {
