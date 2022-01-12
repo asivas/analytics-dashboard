@@ -17,15 +17,14 @@ comopser require asivas/analytics-dashboard
 Once you have required the package the configuration requires this 2 steps:
 
 1. Create your Analitycs Facade class in app\Facades
-
-   The Facade **must implement the getWidget** public method to be able to load the app widgets to get the widgets data
+   
    This class should have a method for every analytics the app could graph or analyze.
    Each method will end up calling ths getData method of an Specific-Analytic class wich extends Asivas\Analytics\Analytics
    ```php
    <?php
    namespace App\Facades;
    use App\Analytics\SomeMetricsIndicator;
-   use App\Http\Controllers\Dashboard\DashboardWidgetController;
+   
    class Analytics
    {            
        /** 
@@ -44,10 +43,26 @@ Once you have required the package the configuration requires this 2 steps:
         // TODO: create the methods similiar to someMetricsIndicator with your criteria
    }
    ```
-2. Register the Facade in app\Providers\AppServiceProvider register method
+2. Create your DashboardWidgetController extending the Asivas\Analytics\Http\Controllers\Dashboard\DashboardWidgetController
+   This class should be the one creating the panels and widgets of the app's dashboard.
+```php
+   namespace App\Http\Controllers\Dashboard;
+   
+   
+   use Asivas\Analytics\Http\Controllers\Dashboard\DashboardWidgetController as AsivasDashboardWidgetController;
+   
+   class DashboardWidgetController extends AsivasDashboardWidgetController
+   {
+   ....
+   }
+```
+3. Register the Facades Analytcs to return new instance of the class from (1)  and WidgetController to return new instance of the class from
+(2) in app\Providers\AppServiceProvider register method
 
    ```php
    use App\Facades\Analytics;
+   use App\Http\Controllers\Dashboard\DashboardWidgetController;
+   
    class AppServiceProvider extends ServiceProvider
     {
     /**
@@ -61,14 +76,19 @@ Once you have required the package the configuration requires this 2 steps:
         $this->app->bind('Analytics', function($app) {
            return new Analytics();
         });
+   
+         $this->app->bind('WidgetController', function($app) {
+            return new DashboardWidgetController();
+        });
      }
    ...
    ```
-3. Add Analytics alias pointing to Asivas\Analytics\AnalyticsFacade class in the 'aliases' key of config/app.php
+4. Add Analytics alias pointing to Asivas\Analytics\AnalyticsFacade class in the 'aliases' key of config/app.php
     ```php
    'aliases' => [
    ...
-     'Analytics' => \Asivas\Analytics\AnalyticsFacade::class
+     'Analytics' => \Asivas\Analytics\AnalyticsFacade::class,
+     'WidgetController' => \Asivas\Analytics\WiggetControllerFacade::class
    ...
     ```
 5. For every analysis the app should graph or show in the dashboard

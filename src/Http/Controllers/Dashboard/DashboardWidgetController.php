@@ -5,6 +5,7 @@ use Asivas\Analytics\AnalyticsFacade;
 use Asivas\Analytics\Http\Controllers\Dashboard\Formaters\PercentualFormatter;
 use Asivas\Analytics\PanelWidget;
 use Asivas\Analytics\Widget\Widget;
+use Asivas\Analytics\WidgetControllerFacade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -23,7 +24,7 @@ class DashboardWidgetController
         $dFrom = Carbon::create($from);
         $dTo = Carbon::create($to);
 
-        $widget = AnalyticsFacade::getWidget($analyticName);
+        $widget = WidgetControllerFacade::getWidget($analyticName);
         $response = $this->buildResponse($widget, $data, $dFrom, $dTo, $params);
 
         return $response;
