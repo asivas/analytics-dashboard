@@ -25,17 +25,19 @@ class DashboardWidgetController
         $dFrom = Carbon::create($from);
         $dTo = Carbon::create($to);
 
-        $response = $this->buildResponse($data, $dFrom, $dTo, $params);
+        $widget = AnalyticsFacade::getWidget($analyticName);
+        $response = $this->buildResponse($widget, $data, $dFrom, $dTo, $params);
 
         return $response;
     }
 
     /**
+     * @param Widget $widget
      * @return string It should return the formatter class needed for the type of graphs and the analitic
      */
-    public function getFormatterClass()
+    public function getFormatterClass(Widget $widget)
     {
-        $formatterClass = $this->dataMap->getFormatter();
+        $formatterClass = $widget->getFormatter();
         if (!isset($formatterClass))
             $formatterClass = PercentualFormatter::class;
         return $formatterClass;
@@ -45,7 +47,7 @@ class DashboardWidgetController
      * @param $analyticsName
      * @return Widget
      */
-    protected function getDataMap($analyticsName)
+    public function getWidget($analyticsName)
     {
         $this->setupWidgetsPanels();
         $panels = $this->getWidgetsPanels();
@@ -63,22 +65,22 @@ class DashboardWidgetController
 
     public function getData($analyticsName, $from, $to)
     {
-        $this->dataMap = $this->getDataMap($analyticsName);
         return AnalyticsFacade::$analyticsName($from, $to);
     }
 
     /**
+     * @param Widget $widget
      * @param $data
      * @param $from
      * @param $to
      * @param $groupBy
      * @return array
      */
-    public function buildResponse($data, $from, $to, $groupBy): array
+    public function buildResponse(Widget $widget, $data, $from, $to, $groupBy): array
     {
         $allSeries = [];
         $series = [];
-        $dataMapSeries = $this->dataMap->getSeries();
+        $dataMapSeries = $widget->getSeries();
         if (isset($dataMapSeries)) {
             foreach ($data as $elem) {
                 $series[] = $elem[$dataMapSeries];
@@ -89,7 +91,7 @@ class DashboardWidgetController
                 $dataSerie = [];
                 foreach ($data as $elem) {
                     if (($serie == $elem[$dataMapSeries])) {
-                        $dataSerie[$elem[$this->dataMap->getLabel()]] = $elem[$this->dataMap->getSerie()];
+                        $dataSerie[$elem[$widget->getLabel()]] = $elem[$widget->getSerie()];
                     }
                 }
                 $auxSerie['data'] = $dataSerie;
@@ -98,13 +100,13 @@ class DashboardWidgetController
         } else {
             $uniqueDataSerie = [];
             foreach ($data as $elem) {
-                $uniqueDataSerie[$elem[$this->dataMap->getLabel()]] = $elem[$this->dataMap->getSerie()];
-                $auxSerie['name'] = $this->dataMap->getSerie();
+                $uniqueDataSerie[$elem[$widget->getLabel()]] = $elem[$widget->getSerie()];
+                $auxSerie['name'] = $widget->getSerie();
                 $auxSerie['data'] = $uniqueDataSerie;
                 $allSeries = [$auxSerie];
             }
         }
-        $formater = $this->getFormatterClass();
+        $formater = $this->getFormatterClass($widget);
         return $formater::formatResponse($from, $to, $allSeries);
     }
 

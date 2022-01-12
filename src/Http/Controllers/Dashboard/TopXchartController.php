@@ -4,20 +4,21 @@
 namespace Asivas\Analytics\Http\Controllers\Dashboard;
 
 
+use Asivas\Analytics\Widget;
 use Illuminate\Support\Carbon;
 
 class TopXchartController extends DashboardWidgetController
 {
-    public function buildResponse($data, $from, $to, $groupBy): array
+    public function buildResponse(Widget $widget, $data, $from, $to, $groupBy): array
     {
         $serie = [];
         foreach ($data as $elem) {
             $aux = [];
-            $aux[$this->dataMap->getLabel()] = $elem[$this->dataMap->getLabel()];
-            $aux[$this->dataMap->getSerie()] = $elem[$this->dataMap->getSerie()];
+            $aux[$widget->getLabel()] = $elem[$widget->getLabel()];
+            $aux[$widget->getSerie()] = $elem[$widget->getSerie()];
             array_push($serie,$aux);
         }
-        $formater = $this->getFormatterClass();
+        $formater = $this->getFormatterClass($widget);
         return $formater::formatResponse($from, $to, $serie);
     }
 }
