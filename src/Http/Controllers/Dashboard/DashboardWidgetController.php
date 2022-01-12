@@ -43,6 +43,7 @@ class DashboardWidgetController
 
     public function getData($analyticsName, $from, $to)
     {
+        $this->setupWidgetsPanels();
         $panels = $this->getWidgetsPanels();
         /** @var PanelWidget  $panel */
         foreach($panels as $panel) {
