@@ -19,9 +19,14 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
 
     protected $icon;
     protected $bgcolor;
+
     protected $data;
     protected $counter;
     protected $controllerClass;
+
+    // attributes used to force information on frontend (css classes and columns of the containing parent)
+    protected $baseDisplayClass;
+    protected $columns;
 
     public function __construct($title, $type = 'Widget', $controllerClass=null)
     {
@@ -250,8 +255,41 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getBaseDisplayClass()
+    {
+        return $this->baseDisplayClass;
+    }
 
+    /**
+     * @param mixed $baseDisplayClass
+     * @return Widget
+     */
+    public function setBaseDisplayClass($baseDisplayClass)
+    {
+        $this->baseDisplayClass = $baseDisplayClass;
+        return $this;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getColumns()
+    {
+        return $this->columns;
+    }
+
+    /**
+     * @param mixed $columns
+     * @return Widget
+     */
+    public function setColumns($columns)
+    {
+        $this->columns = $columns;
+        return $this;
+    }
 
     public function toArray() :array
     {
@@ -267,6 +305,7 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
             'counter' => $this->counter,
             'data' => $this->data,
             'series' => $this->series,
+            'cssClass' => $this->baseDisplayClass . " col".(isset($this->columns)?'-'.$this->columns:'')
         ];
     }
 
