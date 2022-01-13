@@ -25,7 +25,12 @@ class DashboardWidgetController
         $dTo = Carbon::create($to);
 
         $widget = WidgetControllerFacade::getWidget($analyticName);
+
         $response = $this->buildResponse($widget, $data, $dFrom, $dTo, $params);
+
+        if($fn =$widget->getDisplayCallback())
+            if(!$fn($dFrom,$dTo,$data))
+                $response['display']=false;
 
         return $response;
     }
