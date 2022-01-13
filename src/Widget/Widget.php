@@ -28,11 +28,15 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
     protected $baseDisplayClass;
     protected $columns;
 
+    /** @var \Closure */
+    protected $shouldDisplayClosure;
+
     public function __construct($title, $type = 'Widget', $controllerClass=null)
     {
         $this->type = $type;
         $this->title = $title;
         if(isset($controllerClass)) $this->setControllerClass($controllerClass);
+        $this->shouldDisplayClosure = function ($from,$to,$data) { return true; };
     }
 
     static function create($title, $type = null) {
@@ -290,6 +294,26 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
         $this->columns = $columns;
         return $this;
     }
+
+    /**
+     * @return \Closure
+     */
+    public function getShouldDisplayClosure(): \Closure
+    {
+        return $this->shouldDisplayClosure;
+    }
+
+    /**
+     * @param \Closure $shouldDisplayClosure
+     * @return Widget
+     */
+    public function setShouldDisplayClosure(\Closure $shouldDisplayClosure): Widget
+    {
+        $this->shouldDisplayClosure = $shouldDisplayClosure;
+        return $this;
+    }
+
+
 
     public function toArray() :array
     {

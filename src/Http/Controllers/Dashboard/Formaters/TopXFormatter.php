@@ -11,6 +11,6 @@ class TopXFormatter implements WidgetFormatter
 
     static function formatResponse(Carbon $dFrom, Carbon $dTo, array $allSeries, array $compareSeries = null): array
     {
-        return $allSeries;
+        return ['items'=>$allSeries];
     }
 }

@@ -21,16 +21,13 @@ class DashboardWidgetController
         $to = $params['endDate'];
         $data = $this->getData($analyticName, $from, $to);
 
-        $dFrom = Carbon::create($from);
-        $dTo = Carbon::create($to);
-
+        /** @var Widget $widget */
         $widget = WidgetControllerFacade::getWidget($analyticName);
 
-        $response = $this->buildResponse($widget, $data, $dFrom, $dTo, $params);
-
-        if($fn =$widget->getDisplayCallback())
-            if(!$fn($dFrom,$dTo,$data))
-                $response['display']=false;
+        $shoulDisplayClosure = $widget->getShouldDisplayClosure();
+        $response['display']=$shoulDisplayClosure(Carbon::create($from),Carbon::create($to),$data);
+        if($response['display'])
+            $response = $response + $this->buildResponse($widget, $data, Carbon::create($from), Carbon::create($to), $params);
 
         return $response;
     }
