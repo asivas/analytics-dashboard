@@ -24,12 +24,46 @@ class DashboardWidgetController
         /** @var Widget $widget */
         $widget = WidgetControllerFacade::getWidget($analyticName);
 
-        $shoulDisplayClosure = $widget->getShouldDisplayClosure();
-        $response['display']=$shoulDisplayClosure(Carbon::create($from),Carbon::create($to),$data);
+        $response = $this->prepareWidgetData($widget, $from, $to, $data);
         if($response['display'])
             $response = $response + $this->buildResponse($widget, $data, Carbon::create($from), Carbon::create($to), $params);
 
         return $response;
+    }
+
+    public function getAnalytics()
+    {
+        $this->setupWidgetsPanels();
+        $panels = $this->getWidgetsPanels();
+        $analytics = [];
+        $request = \request();
+        $params = $request->all();
+        $from = $params['startDate'];
+        $to = $params['endDate'];
+
+        /** @var PanelWidget $panel */
+        foreach ($panels as $panel) {
+            $widgets = $panel->getWidgets();
+            $panelAnalytics = [];
+            /** @var Widget $widget */
+            foreach ($widgets as $widgetName => $widget) {
+                if($widget->getUrl()!=null) {
+                    $widgetController = $this;
+                    $widgetControllerClass = $widget->getControllerClass();
+                    if($widgetControllerClass!=null && class_exists($widgetControllerClass))
+                    {
+                        $widgetController= new $widgetControllerClass();
+                    }
+                    $response = $widgetController->getWidgetData($request,$widget->getUrl());
+                    $widget->setData($response);
+                }else{
+                    $widget->setData($this->prepareWidgetData($widget, $from, $to));
+                }
+                $panelAnalytics[$widgetName] = $widget->toArray();
+            }
+            $analytics[$panel->getType()] = $panelAnalytics;
+        }
+        return $analytics;
     }
 
     /**
@@ -134,33 +168,7 @@ class DashboardWidgetController
         return [];
     }
 
-    public function getAnalytics()
-    {
-        $this->setupWidgetsPanels();
-        $panels = $this->getWidgetsPanels();
-        $analytics = [];
-        /** @var PanelWidget $panel */
-        foreach ($panels as $panel) {
-            $widgets = $panel->getWidgets();
-            $panelAnalytics = [];
-            /** @var Widget $widget */
-            foreach ($widgets as $widgetName => $widget) {
-                if($widget->getUrl()!=null) {
-                    $widgetController = $this;
-                    $widgetControllerClass = $widget->getControllerClass();
-                    if($widgetControllerClass!=null && class_exists($widgetControllerClass))
-                    {
-                        $widgetController= new $widgetControllerClass();
-                    }
-                    $response = $widgetController->getWidgetData(\request(),$widget->getUrl());
-                    $widget->setData($response);
-                }
-                $panelAnalytics[$widgetName] = $widget->toArray();
-            }
-            $analytics[$panel->getType()] = $panelAnalytics;
-        }
-        return $analytics;
-    }
+
 
     /**
      * @return PanelWidget[]
@@ -202,6 +210,19 @@ class DashboardWidgetController
         return self::$labelsSeriesMaps[$panelName];
     }
 
+    /**
+     * @param Widget $widget
+     * @param $from
+     * @param $to
+     * @param $data
+     * @return array
+     */
+    protected function prepareWidgetData(Widget $widget, $from, $to, $data=null): array
+    {
+        $shoulDisplayClosure = $widget->getShouldDisplayClosure();
+        $response['display'] = $shoulDisplayClosure(Carbon::create($from), Carbon::create($to), $data);
+        return $response;
+    }
 
 
 }

@@ -36,7 +36,7 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
         $this->type = $type;
         $this->title = $title;
         if(isset($controllerClass)) $this->setControllerClass($controllerClass);
-        $this->shouldDisplayClosure = function ($from,$to,$data) { return true; };
+        $this->shouldDisplayClosure = function ($from,$to,$data=null) { return true; };
     }
 
     static function create($title, $type = null) {
