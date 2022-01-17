@@ -4,6 +4,7 @@ namespace Asivas\Analytics\Http\Controllers\Dashboard;
 use Asivas\Analytics\AnalyticsFacade;
 use Asivas\Analytics\Http\Controllers\Dashboard\Formaters\PercentualFormatter;
 use Asivas\Analytics\PanelWidget;
+use Asivas\Analytics\Widget\MultiWidget;
 use Asivas\Analytics\Widget\Widget;
 use Asivas\Analytics\WidgetControllerFacade;
 use Illuminate\Http\Request;
@@ -47,18 +48,20 @@ class DashboardWidgetController
             $panelAnalytics = [];
             /** @var Widget $widget */
             foreach ($widgets as $widgetName => $widget) {
+                $data = null;
+
                 if($widget->getUrl()!=null) {
-                    $widgetController = $this;
-                    $widgetControllerClass = $widget->getControllerClass();
-                    if($widgetControllerClass!=null && class_exists($widgetControllerClass))
-                    {
-                        $widgetController= new $widgetControllerClass();
-                    }
-                    $response = $widgetController->getWidgetData($request,$widget->getUrl());
-                    $widget->setData($response);
+                    $data = $this->fetchWidgetData($widget, $request);
                 }else{
-                    $widget->setData($this->prepareWidgetData($widget, $from, $to));
+                    $data = $this->prepareWidgetData($widget, $from, $to);
+                    if(is_a($widget,MultiWidget::class))
+                    {
+                        foreach ($widget->getWidgets() as $subWidgetName => $subWidget) {
+                            $subWidget->setData($this->fetchWidgetData($subWidget,$request));
+                        }
+                    }
                 }
+                $widget->setData($data);
                 $panelAnalytics[$widgetName] = $widget->toArray();
             }
             $analytics[$panel->getType()] = $panelAnalytics;
@@ -89,10 +92,17 @@ class DashboardWidgetController
         /** @var PanelWidget $panel */
         foreach ($panels as $panel) {
             $widgets = $panel->getWidgets();
-            /** @var Widget $analytic */
-            foreach ($widgets as $analytic) {
-                if ($analytic->getUrl() === $analyticsName)
-                    return $analytic;
+            /** @var Widget $widget */
+            foreach ($widgets as $widget) {
+                if ($widget->getUrl() === $analyticsName)
+                    return $widget;
+                if(is_a($widget,MultiWidget::class)) {
+                    foreach ($widget->getWidgets() as $subWidget)
+                    {
+                        if ($subWidget->getUrl() === $analyticsName)
+                            return $subWidget;
+                    }
+                }
             }
         }
         return null;
@@ -223,6 +233,21 @@ class DashboardWidgetController
         $response['display'] = $shoulDisplayClosure(Carbon::create($from), Carbon::create($to), $data);
         return $response;
     }
+    /**
+     * @param Widget $widget
+     * @param $request
+     * @return array
+     */
+    protected function fetchWidgetData(Widget $widget, $request): array
+    {
+        $widgetController = $this;
+        $widgetControllerClass = $widget->getControllerClass();
+        if ($widgetControllerClass != null && class_exists($widgetControllerClass)) {
+            $widgetController = new $widgetControllerClass();
+        }
+        return $widgetController->getWidgetData($request, $widget->getUrl());
+    }
 
 
 }
+
