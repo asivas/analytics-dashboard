@@ -9,6 +9,7 @@ use Illuminate\Contracts\Support\Jsonable;
 class MultiWidget extends Widget
 {
     protected $widgets;
+    protected $options;
 
     public function __construct($title, $type = null, $controllerClass = null)
     {
@@ -34,6 +35,33 @@ class MultiWidget extends Widget
     }
 
     /**
+     * @return mixed
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * @param mixed $options
+     * @return MultiWidget
+     */
+    public function setOptions($options)
+    {
+        $this->options = $options;
+        return $this;
+    }
+
+    /**
+     * @return MultiWidget
+     */
+    public function fetchOptions()
+    {
+        return $this;
+    }
+
+
+    /**
      * @param \Asivas\Analytics\Widget\Widget $widget
      * @return self
      */
@@ -52,6 +80,7 @@ class MultiWidget extends Widget
     {
         $toArray = parent::toArray();
         $toArray['widgets']=$this->widgets;
+        $toArray['options']=$this->options;
         return $toArray;
     }
 
