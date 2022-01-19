@@ -56,7 +56,6 @@ class DashboardWidgetController
                     $data = $this->prepareWidgetData($widget, $from, $to);
                     if(is_a($widget,MultiWidget::class))
                     {
-                        $widget = $widget->fetchOptions();
                         foreach ($widget->getWidgets() as $subWidgetName => $subWidget) {
                             $subWidget->setData($this->fetchWidgetData($subWidget,$request));
                         }
