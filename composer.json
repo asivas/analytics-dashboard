@@ -2,14 +2,9 @@
     "name": "asivas/analytics-dashboard",
     "description": "The \"CRUD-Resouce\" Analytics Dashboard controller, to be used as part of the \nAsivas solution for https://gitlab.com/asivas/larvue-abm/ABM",
     "type": "library",
-    "version": "v1.0.4",
-    "require": {
-        "illuminate/support": "^8.66",
-        "illuminate/contracts": "^8.66",
-        "illuminate/console": "^8.66"
-    },
+    "version": "v2.0",
     "require-dev": {
-        "laravel/framework": "^8.66"
+        "laravel/framework": "^9.0"
     },
     "autoload": {
         "psr-4": {
