@@ -22,5 +22,8 @@
             "name": "Lucas Vidaguren",
             "email": "lucas.vidaguren@asivas.com.ar"
         }
-    ]
+    ],
+  "require": {
+    "ext-json": "*"
+  }
 }

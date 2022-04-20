@@ -8,7 +8,8 @@ use Illuminate\Contracts\Support\Jsonable;
 
 class MultiWidget extends Widget
 {
-    protected $widgets;
+    /** @var PanelWidget */
+    protected $panel;
     protected $options;
 
     public function __construct($title, $type = null, $controllerClass = null)
@@ -21,7 +22,7 @@ class MultiWidget extends Widget
      */
     public function getWidgets()
     {
-        return $this->widgets;
+        return $this->panel->getWidgets();
     }
 
     /**
@@ -30,7 +31,7 @@ class MultiWidget extends Widget
      */
     public function setWidgets($widgets)
     {
-        $this->widgets = $widgets;
+        $this->panel->setWidgets($widgets);
         return $this;
     }
 
@@ -60,26 +61,39 @@ class MultiWidget extends Widget
         return $this;
     }
 
+    /**
+     * @return PanelWidget
+     */
+    public function getPanel(): PanelWidget
+    {
+        return $this->panel;
+    }
+
+    /**
+     * @param PanelWidget $panel
+     */
+    public function setPanel(PanelWidget $panel): void
+    {
+        $this->panel = $panel;
+    }
+
+
+
 
     /**
      * @param \Asivas\Analytics\Widget\Widget $widget
      * @return self
      */
     public function addWidget($widget,$widgetName=null) {
-        if(!isset($widgetName)) {
-            if($widget->getUrl()!=null)
-                $widgetName = $widget->getUrl();
-            else
-                $widgetName = $widget->getTitle();
-        }
-        $this->widgets[$widgetName] = $widget;
+        $this->panel->addWidget($widget,$widgetName);
         return $this;
     }
 
     public function toArray(): array
     {
         $toArray = parent::toArray();
-        $toArray['widgets']=$this->widgets;
+        $toArray['widgets']=$this->getWidgets();
+        $toArray['panel']=$this->getPanel();
         $toArray['options']=$this->options;
         return $toArray;
     }

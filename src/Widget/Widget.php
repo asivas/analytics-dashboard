@@ -5,7 +5,6 @@ namespace Asivas\Analytics\Widget;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Str;
-use phpDocumentor\Reflection\Types\This;
 
 class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
 {
@@ -17,11 +16,9 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
     protected $formatter;
     protected $type;
 
-    protected $icon;
-    protected $bgcolor;
+
 
     protected $data;
-    protected $counter;
     protected $controllerClass;
 
     // attributes used to force information on frontend (css classes and columns of the containing parent)
@@ -325,8 +322,6 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
             'formatter' => $this->formatter,
             'type'=> $this->type,
             'icon' => $this->icon,
-            'bgcolor' => $this->bgcolor,
-            'counter' => $this->counter,
             'data' => $this->data,
             'series' => $this->series,
             'cssClass' => $this->baseDisplayClass . " col".(isset($this->columns)?'-'.$this->columns:'')
