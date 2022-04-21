@@ -78,8 +78,6 @@ class MultiWidget extends Widget
     }
 
 
-
-
     /**
      * @param \Asivas\Analytics\Widget\Widget $widget
      * @return self

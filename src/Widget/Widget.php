@@ -16,7 +16,7 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
     protected $formatter;
     protected $type;
 
-
+    protected $size;
 
     protected $data;
     protected $controllerClass;
@@ -151,42 +151,6 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
     /**
      * @return mixed
      */
-    public function getIcon()
-    {
-        return $this->icon;
-    }
-
-    /**
-     * @param mixed $icon
-     * @return Widget
-     */
-    public function setIcon($icon)
-    {
-        $this->icon = $icon;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBgcolor()
-    {
-        return $this->bgcolor;
-    }
-
-    /**
-     * @param mixed $bgcolor
-     * @return Widget
-     */
-    public function setBgcolor($bgcolor)
-    {
-        $this->bgcolor = $bgcolor;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getData()
     {
         return $this->data;
@@ -202,23 +166,6 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCounter()
-    {
-        return $this->counter;
-    }
-
-    /**
-     * @param mixed $counter
-     * @return Widget
-     */
-    public function setCounter($counter)
-    {
-        $this->counter = $counter;
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -317,13 +264,10 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
         return [
             'url'=>$this->url,
             'title'=>$this->title,
-            'label'=>$this->label,
-            'serie'=>$this->serie,
             'formatter' => $this->formatter,
             'type'=> $this->type,
-            'icon' => $this->icon,
             'data' => $this->data,
-            'series' => $this->series,
+            'size'=> $this->size,
             'cssClass' => $this->baseDisplayClass . " col".(isset($this->columns)?'-'.$this->columns:'')
         ];
     }

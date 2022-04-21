@@ -7,9 +7,25 @@ use Asivas\Analytics\Http\Controllers\Dashboard\CounterChartController;
 
 class CounterChartWidget extends Widget
 {
-
-    protected $bgcolor;
     protected $icon;
+
+    /**
+     * @return mixed
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * @param mixed $icon
+     * @return Widget
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+        return $this;
+    }
 
     public function __construct($title)
     {
@@ -19,7 +35,6 @@ class CounterChartWidget extends Widget
     public function toArray(): array
     {
         $arr = parent::toArray();
-        $arr['bgcolor'] = $this->bgcolor;
         $arr['icon'] = $this->icon;
         return $arr;
     }
