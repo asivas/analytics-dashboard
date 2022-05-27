@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b90676fc-e435-4038-a57f-a8a996bd3e96" name="Changes" comment="Untested HeatMap widget and controller (expecting that TwoAxisSimpleFormatter should be useful)">
-      <change beforePath="$PROJECT_DIR$/.idea/analytics-dashboard.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/analytics-dashboard.iml" afterDir="false" />
+    <list default="true" id="b90676fc-e435-4038-a57f-a8a996bd3e96" name="Changes" comment="Version Bump to 2.0.1">
+      <change afterPath="$PROJECT_DIR$/src/Http/Controllers/Dashboard/Formaters/TwoAxisRangesFormatter.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -172,6 +172,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/lucas/PhpstormProjects/analytics-dashboard/src/Http/Controllers/Dashboard/Formaters&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -182,6 +183,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Http/Controllers/Dashboard/Formaters" />
       <recent name="$PROJECT_DIR$/../ABM" />
       <recent name="$PROJECT_DIR$/dockerfiles/config" />
       <recent name="$PROJECT_DIR$/dockerfiles" />
@@ -202,7 +204,9 @@
       <workItem from="1650366657625" duration="3532000" />
       <workItem from="1650383591880" duration="3789000" />
       <workItem from="1650458491544" duration="7542000" />
-      <workItem from="1650553440820" duration="297000" />
+      <workItem from="1650553440820" duration="1923000" />
+      <workItem from="1650881407171" duration="1899000" />
+      <workItem from="1653568033899" duration="1212000" />
     </task>
     <task id="LOCAL-00001" summary="Added docker-compose with the php image composer.json cleanup upgrade-laravel-9">
       <created>1644450825635</created>
@@ -239,7 +243,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650553129543</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Version Bump to 2.0.1">
+      <created>1650553757157</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1650553757157</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -274,6 +285,7 @@
     <MESSAGE value="Moved bgcolor and icon to Counter, panel in MultiWidget removed unused counter from widget" />
     <MESSAGE value="Moved properites from widget to leaf widgets" />
     <MESSAGE value="Untested HeatMap widget and controller (expecting that TwoAxisSimpleFormatter should be useful)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Untested HeatMap widget and controller (expecting that TwoAxisSimpleFormatter should be useful)" />
+    <MESSAGE value="Version Bump to 2.0.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version Bump to 2.0.1" />
   </component>
 </project>
