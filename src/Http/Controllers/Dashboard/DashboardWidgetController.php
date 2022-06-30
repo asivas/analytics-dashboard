@@ -18,8 +18,10 @@ class DashboardWidgetController
     public function getWidgetData(Request $request, $analyticName)
     {
         $params = $request->all();
-        $from = $params['startDate'];
-        $to = $params['endDate'];
+        $from = $request->query('startDate',Carbon::today());
+        $to = $request->query('endDate',Carbon::today());
+        $params['startDate'] = $from;
+        $params['endDate'] = $to;
         $data = $this->getData($analyticName, $from, $to);
 
         /** @var Widget $widget */
