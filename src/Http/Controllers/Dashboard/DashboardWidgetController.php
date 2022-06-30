@@ -38,9 +38,8 @@ class DashboardWidgetController
         $panels = $this->getWidgetsPanels();
         $analytics = [];
         $request = \request();
-        $params = $request->all();
-        $from = $params['startDate'];
-        $to = $params['endDate'];
+        $from = $request->query('startDate',Carbon::today());
+        $to = $request->query('endDate',Carbon::today());
 
         /** @var PanelWidget $panel */
         foreach ($panels as $panel) {
