@@ -13,13 +13,13 @@ class PanelWidget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializabl
     protected $title;
     protected $type;
 
-    public function __construct($type,$title)
+    public function __construct($type,$title=null)
     {
         $this->type = $type;
         $this->title = $title;
     }
 
-    static function create($type,$title) {
+    static function create($type,$title =null) {
         return new static($type,$title);
     }
 

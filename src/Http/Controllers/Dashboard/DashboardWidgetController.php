@@ -217,7 +217,7 @@ class DashboardWidgetController
      * @return PanelWidget
      */
     public function getWidgetsPanel($panelName,$panelTitle=null) {
-        if(!isset($panelTitle)) $panelTitle = $panelName;
+        //if(!isset($panelTitle)) $panelTitle = $panelName;
         if(!isset(self::$labelsSeriesMaps[$panelName]))
             self::addWidgetsPanel(PanelWidget::create($panelName,$panelTitle));
         return self::$labelsSeriesMaps[$panelName];
