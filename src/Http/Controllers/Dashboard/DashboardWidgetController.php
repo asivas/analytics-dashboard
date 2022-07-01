@@ -46,7 +46,8 @@ class DashboardWidgetController
         /** @var PanelWidget $panel */
         foreach ($panels as $panel) {
             $widgets = $panel->getWidgets();
-            $panelAnalytics = [];
+            $panelAnalytics = $panel->toArray();
+            $panelWidgetsWithData=[];
             /** @var Widget $widget */
             foreach ($widgets as $widgetName => $widget) {
                 $data = null;
@@ -63,8 +64,9 @@ class DashboardWidgetController
                     }
                 }
                 $widget->setData($data);
-                $panelAnalytics[$widgetName] = $widget->toArray();
+                $panelWidgetsWithData[$widgetName] = $widget->toArray();
             }
+            $panelAnalytics['widgets'] = $panelWidgetsWithData;
             $analytics[$panel->getType()] = $panelAnalytics;
         }
         return $analytics;
