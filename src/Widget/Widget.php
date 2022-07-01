@@ -250,9 +250,10 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
     /**
      * @param mixed $size
      */
-    public function setSize($size): void
+    public function setSize($size): Widget
     {
         $this->size = $size;
+        return $this;
     }
 
 

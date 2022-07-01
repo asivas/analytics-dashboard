@@ -37,10 +37,12 @@ class CounterChartWidget extends Widget
 
     /**
      * @param mixed $themeName
+     * @return Widget
      */
-    public function setThemeName($themeName): void
+    public function setThemeName($themeName): CounterChartWidget
     {
         $this->themeName = $themeName;
+        return $this;
     }
 
 
