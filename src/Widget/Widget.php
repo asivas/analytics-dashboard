@@ -240,6 +240,24 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
     }
 
     /**
+     * @return mixed
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * @param mixed $size
+     */
+    public function setSize($size): void
+    {
+        $this->size = $size;
+    }
+
+
+
+    /**
      * @return \Closure
      */
     public function getShouldDisplayClosure(): \Closure
