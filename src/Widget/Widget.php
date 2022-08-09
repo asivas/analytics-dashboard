@@ -28,6 +28,11 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
     /** @var \Closure */
     protected $shouldDisplayClosure;
 
+    /**
+     * @param $title
+     * @param $type
+     * @param  $controllerClass
+     */
     public function __construct($title, $type = 'Widget', $controllerClass=null)
     {
         $this->type = $type;

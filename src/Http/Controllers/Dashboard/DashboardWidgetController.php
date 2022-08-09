@@ -16,22 +16,6 @@ class DashboardWidgetController
     protected static $labelsSeriesMaps;
     protected $formatters = [];
 
-
-    public function getWidgetData(Request $request, $analyticName)
-    {
-
-        $data = Formaters\WidgetFormatter::getData($analyticName, $from, $to);
-
-        /** @var Widget $widget */
-        $widget = WidgetControllerFacade::getWidget($analyticName);
-
-        //$response = $this->prepareWidgetData($widget, $from, $to, $data);
-        if($response['display'])
-            $response = $response + $this->buildResponse($widget, $data, Carbon::create($from), Carbon::create($to), $params);
-
-        return $response;
-    }
-
     public function getAnalytics()
     {
         $this->setupWidgetsPanels();
@@ -41,7 +25,6 @@ class DashboardWidgetController
         $from = $request->query('startDate',Carbon::today());
         $to = $request->query('endDate',Carbon::today());
 
-        /** @var PanelWidget $panel */
         foreach ($panels as $panel) {
             $widgets = $panel->getWidgets();
             $panelAnalytics = $panel->toArray();
@@ -187,11 +170,6 @@ class DashboardWidgetController
      */
     protected function fetchWidgetData(Widget $widget, $request): array
     {
-        $widgetController = $this;
-        $widgetControllerClass = $widget->getControllerClass();
-        if ($widgetControllerClass != null && class_exists($widgetControllerClass)) {
-            $widgetController = new $widgetControllerClass();
-        }
         $params = $request->all();
         $from = $request->query('startDate',Carbon::today());
         $to = $request->query('endDate',Carbon::today());
