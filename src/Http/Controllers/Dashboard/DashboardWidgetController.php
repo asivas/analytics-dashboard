@@ -175,7 +175,7 @@ class DashboardWidgetController
         $to = $request->query('endDate',Carbon::today());
         $params['startDate'] = $from;
         $params['endDate'] = $to;
-        return $this->getFormatter($widget)->getWidgetData($widget->getUrl(),$from,$to);
+        return $this->getFormatter($widget)->getWidgetData($widget->getUrl(),$from,$to,$params);
     }
 
 

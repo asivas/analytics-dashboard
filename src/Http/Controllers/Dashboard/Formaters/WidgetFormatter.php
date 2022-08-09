@@ -33,7 +33,7 @@ abstract class WidgetFormatter
         return $response;
     }
 
-    public function getWidgetData($analyticName, $from, $to) {
+    public function getWidgetData($analyticName, $from, $to,$otherParams=[]) {
 
         $data = self::getData($analyticName, $from, $to);
 
@@ -42,7 +42,7 @@ abstract class WidgetFormatter
 
         $response = $this->prepareWidgetData($widget, $from, $to, $data);
         if($response['display'])
-            $response = $response + self::buildResponse($widget, $data, Carbon::create($from), Carbon::create($to), $params);
+            $response = $response + self::buildResponse($widget, $data, Carbon::create($from), Carbon::create($to), $otherParams);
 
         return $response;
     }
