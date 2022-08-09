@@ -6,10 +6,10 @@ namespace Asivas\Analytics\Http\Controllers\Dashboard\Formaters;
 
 use Illuminate\Support\Carbon;
 
-class TwoAxisUserFormatter implements WidgetFormatter
+class TwoAxisUserFormatter extends WidgetFormatter
 {
 
-    static function formatResponse(Carbon $dFrom, Carbon $dTo, array $allSeries, array $compareSeries = null): array
+    function formatResponse(Carbon $dFrom, Carbon $dTo, array $allSeries, array $compareSeries = null): array
     {
         $computedSeries = [];
         $users = [];

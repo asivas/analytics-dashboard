@@ -6,7 +6,7 @@ namespace Asivas\Analytics\Http\Controllers\Dashboard\Formaters;
 
 use Illuminate\Support\Carbon;
 
-class DateAxisFormatter implements WidgetFormatter
+class DateAxisFormatter extends WidgetFormatter
 {
     /**
      * @param Carbon $dFrom
@@ -15,7 +15,7 @@ class DateAxisFormatter implements WidgetFormatter
      * @param array $compareSerie
      * @return array[]
      */
-    static function formatResponse(Carbon $dFrom, Carbon $dTo, array $allSeries, array $compareSeries= null): array
+    function formatResponse(Carbon $dFrom, Carbon $dTo, array $allSeries, array $compareSeries= null): array
     {
         $categories= [];
         $computedSeries = [];

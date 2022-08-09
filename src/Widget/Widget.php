@@ -28,6 +28,11 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
     /** @var \Closure */
     protected $shouldDisplayClosure;
 
+    /**
+     * @param $title
+     * @param $type
+     * @param  $controllerClass
+     */
     public function __construct($title, $type = 'Widget', $controllerClass=null)
     {
         $this->type = $type;
@@ -238,6 +243,25 @@ class Widget implements \ArrayAccess, Arrayable, Jsonable, \JsonSerializable
         $this->columns = $columns;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * @param mixed $size
+     */
+    public function setSize($size): Widget
+    {
+        $this->size = $size;
+        return $this;
+    }
+
+
 
     /**
      * @return \Closure

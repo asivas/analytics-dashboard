@@ -8,7 +8,8 @@ use Asivas\Analytics\Http\Controllers\Dashboard\CounterChartController;
 class CounterChartWidget extends Widget
 {
     protected $icon;
-
+    protected $themeName;
+    protected $counterFormat;
     /**
      * @return mixed
      */
@@ -27,6 +28,45 @@ class CounterChartWidget extends Widget
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getThemeName()
+    {
+        return $this->themeName;
+    }
+
+    /**
+     * @param mixed $themeName
+     * @return Widget
+     */
+    public function setThemeName($themeName): CounterChartWidget
+    {
+        $this->themeName = $themeName;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCounterFormat()
+    {
+        return $this->counterFormat;
+    }
+
+    /**
+     * @param mixed $counterFormat
+     * @return CounterChartWidget
+     */
+    public function setCounterFormat($counterFormat)
+    {
+        $this->counterFormat = $counterFormat;
+        return $this;
+    }
+
+
+
+
     public function __construct($title)
     {
         parent::__construct($title, 'CounterChart', CounterChartController::class);
@@ -36,6 +76,8 @@ class CounterChartWidget extends Widget
     {
         $arr = parent::toArray();
         $arr['icon'] = $this->icon;
+        $arr['themeName'] = $this->themeName;
+        $arr['counterFormat'] = $this->counterFormat;
         return $arr;
     }
 
