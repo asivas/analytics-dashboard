@@ -3,6 +3,7 @@ namespace Asivas\Analytics\Http\Controllers\Dashboard;
 
 use Asivas\Analytics\AnalyticsFacade;
 use Asivas\Analytics\Http\Controllers\Dashboard\Formaters\PercentualFormatter;
+use Asivas\Analytics\Http\Controllers\Dashboard\Formaters\WidgetFormatter;
 use Asivas\Analytics\PanelWidget;
 use Asivas\Analytics\Widget\MultiWidget;
 use Asivas\Analytics\Widget\Widget;
@@ -13,21 +14,18 @@ use Illuminate\Support\Carbon;
 class DashboardWidgetController
 {
     protected static $labelsSeriesMaps;
+    protected $formatters = [];
 
 
     public function getWidgetData(Request $request, $analyticName)
     {
-        $params = $request->all();
-        $from = $request->query('startDate',Carbon::today());
-        $to = $request->query('endDate',Carbon::today());
-        $params['startDate'] = $from;
-        $params['endDate'] = $to;
-        $data = $this->getData($analyticName, $from, $to);
+
+        $data = Formaters\WidgetFormatter::getData($analyticName, $from, $to);
 
         /** @var Widget $widget */
         $widget = WidgetControllerFacade::getWidget($analyticName);
 
-        $response = $this->prepareWidgetData($widget, $from, $to, $data);
+        //$response = $this->prepareWidgetData($widget, $from, $to, $data);
         if($response['display'])
             $response = $response + $this->buildResponse($widget, $data, Carbon::create($from), Carbon::create($to), $params);
 
@@ -55,7 +53,9 @@ class DashboardWidgetController
                 if($widget->getUrl()!=null) {
                     $data = $this->fetchWidgetData($widget, $request);
                 }else{
-                    $data = $this->prepareWidgetData($widget, $from, $to);
+                    /** @var WidgetFormatter $formatter */
+                    $formatter = $this->getFormatter($widget);
+                    $data = $formatter->prepareWidgetData($widget, $from, $to);
                     if(is_a($widget,MultiWidget::class))
                     {
                         foreach ($widget->getWidgets() as $subWidgetName => $subWidget) {
@@ -74,14 +74,19 @@ class DashboardWidgetController
 
     /**
      * @param Widget $widget
-     * @return string It should return the formatter class needed for the type of graphs and the analitic
+     * @return WidgetFormatter It should return the formatter class needed for the type of graphs and the analitic
      */
-    public function getFormatterClass(Widget $widget)
+    public function getFormatter(Widget $widget)
     {
         $formatterClass = $widget->getFormatter();
         if (!isset($formatterClass))
             $formatterClass = PercentualFormatter::class;
-        return $formatterClass;
+
+        if(!isset($this->formatters[$formatterClass]))
+            $this->formatters[$formatterClass] = new $formatterClass();
+
+
+        return $this->formatters[$formatterClass];
     }
 
     /**
@@ -111,58 +116,9 @@ class DashboardWidgetController
         return null;
     }
 
-    public function getData($analyticsName, $from, $to)
-    {
-        return AnalyticsFacade::$analyticsName($from, $to);
-    }
 
-    /**
-     * @param $serie
-     * @param $data
-     * @param Widget $widget
-     * @param null $dataMapSeries
-     * @return array
-     */
-    protected function getSerieData($serie, $data, Widget $widget, $dataMapSeries = null): array
-    {
-        $auxSerie['name'] = $serie;
-        $dataSerie = [];
-        foreach ($data as $elem) {
-            if (!isset($dataMapSeries) || ($serie == $elem[$dataMapSeries])) {
-                $dataSerie[$elem[$widget->getLabel()]] = $elem[$widget->getSerie()];
-            }
-        }
-        $auxSerie['data'] = $dataSerie;
-        return $auxSerie;
-    }
 
-    /**
-     * @param Widget $widget
-     * @param $data
-     * @param $from
-     * @param $to
-     * @param $groupBy
-     * @return array
-     */
-    public function buildResponse(Widget $widget, $data, $from, $to, $groupBy): array
-    {
-        $allSeries = [];
-        $series = [];
-        $dataMapSeries = $widget->getSeries();
-        if (isset($dataMapSeries)) {
-            foreach ($data as $elem) {
-                $series[] = $elem[$dataMapSeries];
-            }
-            $series = array_unique($series);
-            foreach ($series as $serie) {
-                $allSeries[] = $this->getSerieData($serie, $data, $widget, $dataMapSeries);
-            }
-        } else {
-            $allSeries[] = $this->getSerieData($widget->getSerie(), $data, $widget);             ;
-        }
-        $formater = $this->getFormatterClass($widget);
-        return $formater::formatResponse($from, $to, $allSeries);
-    }
+
 
     /**
      * The implmementing class should resolve the userTypeName according to the project's
@@ -223,19 +179,7 @@ class DashboardWidgetController
         return self::$labelsSeriesMaps[$panelName];
     }
 
-    /**
-     * @param Widget $widget
-     * @param $from
-     * @param $to
-     * @param $data
-     * @return array
-     */
-    protected function prepareWidgetData(Widget $widget, $from, $to, $data=null): array
-    {
-        $shoulDisplayClosure = $widget->getShouldDisplayClosure();
-        $response['display'] = $shoulDisplayClosure(Carbon::create($from), Carbon::create($to), $data);
-        return $response;
-    }
+
     /**
      * @param Widget $widget
      * @param $request
@@ -248,7 +192,12 @@ class DashboardWidgetController
         if ($widgetControllerClass != null && class_exists($widgetControllerClass)) {
             $widgetController = new $widgetControllerClass();
         }
-        return $widgetController->getWidgetData($request, $widget->getUrl());
+        $params = $request->all();
+        $from = $request->query('startDate',Carbon::today());
+        $to = $request->query('endDate',Carbon::today());
+        $params['startDate'] = $from;
+        $params['endDate'] = $to;
+        return $this->getFormatter($widget)->getWidgetData($widget->getUrl(),$from,$to);
     }
 
 
