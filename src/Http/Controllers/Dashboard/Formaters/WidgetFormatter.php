@@ -42,7 +42,7 @@ abstract class WidgetFormatter
 
         $response = $this->prepareWidgetData($widget, $from, $to, $data);
         if($response['display'])
-            $response = $response + self::buildResponse($widget, $data, Carbon::create($from), Carbon::create($to), $otherParams);
+            $response = $response + $this->buildResponse($widget, $data, Carbon::create($from), Carbon::create($to), $otherParams);
 
         return $response;
     }
