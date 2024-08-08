@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b90676fc-e435-4038-a57f-a8a996bd3e96" name="Changes" comment="Version Bump to 2.0.1">
-      <change afterPath="$PROJECT_DIR$/src/Http/Controllers/Dashboard/Formaters/TwoAxisRangesFormatter.php" afterDir="false" />
+    <list default="true" id="b90676fc-e435-4038-a57f-a8a996bd3e96" name="Changes" comment="$this instead of self for buildResponse">
+      <change afterPath="$PROJECT_DIR$/src/Enums/LineChartWidgetStrokes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Widget/LineChartWidget.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Widget/LineChartWidget.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +24,14 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="v2.1.0" />
+    <option name="OPTIONS">
+      <set>
+        <option value="NO_FF" />
+      </set>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="PUSH_TAGS">
       <GitPushTagMode>
@@ -33,11 +42,33 @@
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$/../ABM" value="main" />
-        <entry key="$PROJECT_DIR$" value="redefined_widget_properties" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "lvidaguren"
+  }
+}]]></component>
+  <component name="GitLabMergeRequestFiltersHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPENED",
+    "assignee": {
+      "type": "org.jetbrains.plugins.gitlab.mergerequest.ui.filters.GitLabMergeRequestsFiltersValue.MergeRequestsMemberFilterValue.MergeRequestsAssigneeFilterValue",
+      "username": "lucas-vidaguren",
+      "fullname": "Lucas Vidaguren"
+    }
+  }
+}]]></component>
+  <component name="GitLabMergeRequestsSettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "first": "git@gitlab.com:asivas/larvue-abm/analytics-dashboard.git",
+    "second": "0eca0454-c9a2-4308-9fbf-6bb994353e2f"
+  }
+}]]></component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
     <option name="recentBranches">
@@ -63,16 +94,16 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+                    <option name="branchName" value="v2.1.1" />
+                    <option name="lastUsedInstant" value="1660062533" />
+                  </RecentBranch>
+                  <RecentBranch>
                     <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1650553352" />
+                    <option name="lastUsedInstant" value="1660062487" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="redefined_widget_properties" />
-                    <option name="lastUsedInstant" value="1650553172" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="feature/HeatMapWidget" />
-                    <option name="lastUsedInstant" value="1650552337" />
+                    <option name="branchName" value="v2.1.0" />
+                    <option name="lastUsedInstant" value="1656601033" />
                   </RecentBranch>
                 </list>
               </option>
@@ -83,6 +114,12 @@
       </RecentBranches>
     </option>
   </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/asivas/analytics-dashboard.git",
+    "accountId": "1804b67b-dd12-4af7-990c-fe878e106ce5"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../ABM/composer.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
@@ -92,6 +129,13 @@
     <setting file="file://$PROJECT_DIR$/src/Http/Controllers/Dashboard/BarChartController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Http/Controllers/Dashboard/CounterChartController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Http/Controllers/Dashboard/DashboardWidgetController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Http/Controllers/Dashboard/Formaters/DateAxisFormatter.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Http/Controllers/Dashboard/Formaters/PercentualFormatter.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Http/Controllers/Dashboard/Formaters/TopXFormatter.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Http/Controllers/Dashboard/Formaters/TwoAxisRangesFormatter.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Http/Controllers/Dashboard/Formaters/TwoAxisSimpleFormatter.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Http/Controllers/Dashboard/Formaters/TwoAxisUserFormatter.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Http/Controllers/Dashboard/Formaters/WidgetFormatter.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/PanelWidget.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Widget/BarChartWidget.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Widget/CounterChartWidget.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
@@ -101,7 +145,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration">
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/bin/php">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
       <path value="$PROJECT_DIR$/vendor/dflydev/dot-access-data" />
@@ -160,6 +204,10 @@
       <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
     </include_path>
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 7
+}]]></component>
   <component name="ProjectId" id="24tWImlTbOR3ZPvDqonBmQlu2ir" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -167,20 +215,23 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/lucas/PhpstormProjects/analytics-dashboard/src/Http/Controllers/Dashboard/Formaters&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.jetbrains.php.lang.actions.generation.PhpGenerateFieldAccessorHandlerBase$MyMemberChooser.fluent.setters.last.selected": "true",
+    "full.screen.before.presentation.mode": "false",
+    "git-widget-placeholder": "v2.1.1",
+    "last_opened_file_path": "/home/lucas/PhpstormProjects/analytics-dashboard/src/Http/Controllers/Dashboard/Formaters",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/Http/Controllers/Dashboard/Formaters" />
@@ -188,6 +239,14 @@
       <recent name="$PROJECT_DIR$/dockerfiles/config" />
       <recent name="$PROJECT_DIR$/dockerfiles" />
     </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-PS-242.20224.175" />
+        <option value="bundled-php-predefined-a98d8de5180a-d6acee4cb394-com.jetbrains.php.sharedIndexes-PS-242.20224.175" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -207,6 +266,13 @@
       <workItem from="1650553440820" duration="1923000" />
       <workItem from="1650881407171" duration="1899000" />
       <workItem from="1653568033899" duration="1212000" />
+      <workItem from="1653632414058" duration="87000" />
+      <workItem from="1656599228237" duration="3329000" />
+      <workItem from="1656672133386" duration="4873000" />
+      <workItem from="1656684387356" duration="3971000" />
+      <workItem from="1656943673662" duration="2169000" />
+      <workItem from="1660052459703" duration="6489000" />
+      <workItem from="1723073069669" duration="1160000" />
     </task>
     <task id="LOCAL-00001" summary="Added docker-compose with the php image composer.json cleanup upgrade-laravel-9">
       <created>1644450825635</created>
@@ -250,7 +316,98 @@
       <option name="project" value="LOCAL" />
       <updated>1650553757157</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Two Axis Ranges Formatter Added (to be used with heatmap widget)">
+      <created>1653632491305</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1653632491305</updated>
+    </task>
+    <task id="LOCAL-00008" summary="query start date and end date with defaults">
+      <created>1656600977960</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1656600977960</updated>
+    </task>
+    <task id="LOCAL-00009" summary="query start date and end date with defaults on getWidgetData also">
+      <created>1656602286274</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1656602286274</updated>
+    </task>
+    <task id="LOCAL-00010" summary="themeName added as property in CounterChartWidget">
+      <created>1656681303825</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1656681303825</updated>
+    </task>
+    <task id="LOCAL-00011" summary="getter and setter for size on Widget">
+      <created>1656681477375</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1656681477375</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Fixed missing fluent setters">
+      <created>1656681591860</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1656681591860</updated>
+    </task>
+    <task id="LOCAL-00013" summary="added CounterFormat to CounterChartWidget">
+      <created>1656684768420</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1656684768420</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Refactored the panel array structure on getAnalytics">
+      <created>1656685422882</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1656685422882</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Removing panelTitle mandatory/forced on getWidgetsPanel">
+      <created>1656685786070</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1656685786070</updated>
+    </task>
+    <task id="LOCAL-00016" summary="WIP: move buildResponse to formatter">
+      <created>1660058470500</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1660058470500</updated>
+    </task>
+    <task id="LOCAL-00017" summary="WIP: some cleanup before testing">
+      <created>1660058704269</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1660058704269</updated>
+    </task>
+    <task id="LOCAL-00018" summary="WIP: fix params parameter missing">
+      <created>1660058935854</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1660058935854</updated>
+    </task>
+    <task id="LOCAL-00019" summary="$this instead of self for buildResponse">
+      <created>1660061818677</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1660061818677</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -286,6 +443,19 @@
     <MESSAGE value="Moved properites from widget to leaf widgets" />
     <MESSAGE value="Untested HeatMap widget and controller (expecting that TwoAxisSimpleFormatter should be useful)" />
     <MESSAGE value="Version Bump to 2.0.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version Bump to 2.0.1" />
+    <MESSAGE value="Two Axis Ranges Formatter Added (to be used with heatmap widget)" />
+    <MESSAGE value="query start date and end date with defaults" />
+    <MESSAGE value="query start date and end date with defaults on getWidgetData also" />
+    <MESSAGE value="themeName added as property in CounterChartWidget" />
+    <MESSAGE value="getter and setter for size on Widget" />
+    <MESSAGE value="Fixed missing fluent setters" />
+    <MESSAGE value="added CounterFormat to CounterChartWidget" />
+    <MESSAGE value="Refactored the panel array structure on getAnalytics" />
+    <MESSAGE value="Removing panelTitle mandatory/forced on getWidgetsPanel" />
+    <MESSAGE value="WIP: move buildResponse to formatter" />
+    <MESSAGE value="WIP: some cleanup before testing" />
+    <MESSAGE value="WIP: fix params parameter missing" />
+    <MESSAGE value="$this instead of self for buildResponse" />
+    <option name="LAST_COMMIT_MESSAGE" value="$this instead of self for buildResponse" />
   </component>
 </project>
