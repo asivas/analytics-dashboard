@@ -178,8 +178,8 @@ class DashboardWidgetController
     protected function fetchWidgetData(Widget $widget, $request): array
     {
         $params = $request->all();
-        $from = $request->query('startDate',Carbon::today());
-        $to = $request->query('endDate',Carbon::today());
+        $from = $request->get('startDate',Carbon::today());
+        $to = $request->get('endDate',Carbon::today());
         $params['startDate'] = $from;
         $params['endDate'] = $to;
         return $this->getFormatter($widget)->getWidgetData($widget->getUrl(),$from,$to,$params);

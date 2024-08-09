@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b90676fc-e435-4038-a57f-a8a996bd3e96" name="Changes" comment="Add TwoAxisSeriesFormatter and stacked attribute for BarChartWidget.php">
-      <change beforePath="$PROJECT_DIR$/src/Widget/BarChartWidget.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Widget/BarChartWidget.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Http/Controllers/Dashboard/DashboardWidgetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Http/Controllers/Dashboard/DashboardWidgetController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,28 +46,28 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "lvidaguren"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;lvidaguren&quot;
   }
-}]]></component>
-  <component name="GitLabMergeRequestFiltersHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPENED",
-    "assignee": {
-      "type": "org.jetbrains.plugins.gitlab.mergerequest.ui.filters.GitLabMergeRequestsFiltersValue.MergeRequestsMemberFilterValue.MergeRequestsAssigneeFilterValue",
-      "username": "lucas-vidaguren",
-      "fullname": "Lucas Vidaguren"
+}</component>
+  <component name="GitLabMergeRequestFiltersHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPENED&quot;,
+    &quot;assignee&quot;: {
+      &quot;type&quot;: &quot;org.jetbrains.plugins.gitlab.mergerequest.ui.filters.GitLabMergeRequestsFiltersValue.MergeRequestsMemberFilterValue.MergeRequestsAssigneeFilterValue&quot;,
+      &quot;username&quot;: &quot;lucas-vidaguren&quot;,
+      &quot;fullname&quot;: &quot;Lucas Vidaguren&quot;
     }
   }
-}]]></component>
-  <component name="GitLabMergeRequestsSettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "first": "git@gitlab.com:asivas/larvue-abm/analytics-dashboard.git",
-    "second": "0eca0454-c9a2-4308-9fbf-6bb994353e2f"
+}</component>
+  <component name="GitLabMergeRequestsSettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;first&quot;: &quot;git@gitlab.com:asivas/larvue-abm/analytics-dashboard.git&quot;,
+    &quot;second&quot;: &quot;0eca0454-c9a2-4308-9fbf-6bb994353e2f&quot;
   }
-}]]></component>
+}</component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
     <option name="recentBranches">
@@ -112,12 +113,12 @@
       </RecentBranches>
     </option>
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/asivas/analytics-dashboard.git",
-    "accountId": "1804b67b-dd12-4af7-990c-fe878e106ce5"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/asivas/analytics-dashboard.git&quot;,
+    &quot;accountId&quot;: &quot;1804b67b-dd12-4af7-990c-fe878e106ce5&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../ABM/composer.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
@@ -202,10 +203,10 @@
       <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
     </include_path>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="24tWImlTbOR3ZPvDqonBmQlu2ir" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -220,7 +221,7 @@
     "WebServerToolWindowFactoryState": "false",
     "com.jetbrains.php.lang.actions.generation.PhpGenerateFieldAccessorHandlerBase$MyMemberChooser.fluent.setters.last.selected": "true",
     "full.screen.before.presentation.mode": "false",
-    "git-widget-placeholder": "v2.1.1",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "/home/lucas/PhpstormProjects/analytics-dashboard/src/Http/Controllers/Dashboard/Formaters",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
