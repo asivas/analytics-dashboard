@@ -35,7 +35,7 @@ class BarChartWidget extends Widget
         return $this->stacked;
     }
 
-    public function setStacked(bool $stacked): BarChartWidget
+    public function setStacked(bool $stacked =true): BarChartWidget
     {
         $this->stacked = $stacked;
         return $this;

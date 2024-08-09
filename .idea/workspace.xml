@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b90676fc-e435-4038-a57f-a8a996bd3e96" name="Changes" comment="Add stroke to LineChart &#10;&#10;php 8.1+">
-      <change afterPath="$PROJECT_DIR$/src/Http/Controllers/Dashboard/Formaters/TwoAxisSeriesFormatter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="b90676fc-e435-4038-a57f-a8a996bd3e96" name="Changes" comment="Add TwoAxisSeriesFormatter and stacked attribute for BarChartWidget.php">
       <change beforePath="$PROJECT_DIR$/src/Widget/BarChartWidget.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Widget/BarChartWidget.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -272,7 +270,7 @@
       <workItem from="1656684387356" duration="3971000" />
       <workItem from="1656943673662" duration="2169000" />
       <workItem from="1660052459703" duration="6489000" />
-      <workItem from="1723073069669" duration="6116000" />
+      <workItem from="1723073069669" duration="6376000" />
     </task>
     <task id="LOCAL-00001" summary="Added docker-compose with the php image composer.json cleanup upgrade-laravel-9">
       <created>1644450825635</created>
@@ -415,7 +413,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723076545360</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Add TwoAxisSeriesFormatter and stacked attribute for BarChartWidget.php">
+      <option name="closed" value="true" />
+      <created>1723197090100</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1723197090100</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -465,6 +471,7 @@
     <MESSAGE value="WIP: fix params parameter missing" />
     <MESSAGE value="$this instead of self for buildResponse" />
     <MESSAGE value="Add stroke to LineChart &#10;&#10;php 8.1+" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add stroke to LineChart &#10;&#10;php 8.1+" />
+    <MESSAGE value="Add TwoAxisSeriesFormatter and stacked attribute for BarChartWidget.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add TwoAxisSeriesFormatter and stacked attribute for BarChartWidget.php" />
   </component>
 </project>
