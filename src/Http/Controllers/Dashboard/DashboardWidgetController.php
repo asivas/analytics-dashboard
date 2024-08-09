@@ -16,12 +16,13 @@ class DashboardWidgetController
     protected static $labelsSeriesMaps;
     protected $formatters = [];
 
-    public function getAnalytics()
+    public function getAnalytics(\Illuminate\Http\Request $request=null)
     {
         $this->setupWidgetsPanels();
         $panels = $this->getWidgetsPanels();
         $analytics = [];
-        $request = \request();
+        if(!isset($request))
+            $request = \request();
         $from = $request->query('startDate',Carbon::today());
         $to = $request->query('endDate',Carbon::today());
 
