@@ -10,12 +10,18 @@ use Asivas\Analytics\Widget\Widget;
 use Asivas\Analytics\WidgetControllerFacade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class DashboardWidgetController
 {
     protected static $labelsSeriesMaps;
     protected $formatters = [];
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function getAnalytics(\Illuminate\Http\Request $request=null)
     {
         $this->setupWidgetsPanels();
@@ -23,8 +29,8 @@ class DashboardWidgetController
         $analytics = [];
         if(!isset($request))
             $request = \request();
-        $from = $request->query('startDate',Carbon::today());
-        $to = $request->query('endDate',Carbon::today());
+        $from = $request->get('startDate',Carbon::today());
+        $to = $request->get('endDate',Carbon::today());
 
         foreach ($panels as $panel) {
             $widgets = $panel->getWidgets();
