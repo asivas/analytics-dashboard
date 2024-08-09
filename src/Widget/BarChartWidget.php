@@ -7,6 +7,7 @@ use Asivas\Analytics\Http\Controllers\Dashboard\BarChartController;
 class BarChartWidget extends Widget
 {
     protected $horizontal=false;
+    protected $stacked=false;
 
     public function __construct($title)
     {
@@ -29,10 +30,24 @@ class BarChartWidget extends Widget
         $this->horizontal = $horizontal;
     }
 
+    public function isStacked(): bool
+    {
+        return $this->stacked;
+    }
+
+    public function setStacked(bool $stacked): BarChartWidget
+    {
+        $this->stacked = $stacked;
+        return $this;
+    }
+
+
+
     public function toArray(): array
     {
         $arr = parent::toArray();
         $arr['horizontal'] = $this->horizontal;
+        $arr['stacked'] = $this->stacked;
         return $arr;
     }
 
